@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background-color: #191919;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+canvas {
+    background-color: #111;
+    height: 500px;
+}
+
+.score{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.score--value{
+    font-weight: 700;
+    font-size: 3.5rem;
+    display: block;
+    margin-top: -10px;
+}
+
+.menu-screen{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.game-over{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.final-score{
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.btn-play{
+    border: none;
+    border-radius: 100px;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: rgba(0,0,0, 0.4);
+    color: white;
+}
+
+.menu-iniciar{
+    position: absolute;
+    display: block; /* block */
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+canvas{
+    filter: blur(10px);
+}
+
+
+.start-game{
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.nivel-dificuldade{
+    border: none;
+    margin-left: 68px;
+    margin-top: 20px;
+}
+.nivel-dificuldade, .form-control{
+    border-radius: 10px;
+    height: 40px;
+    width: 175px;
+    cursor: pointer;
+}
+
+.play-iniciar{
+    position: relative;
+    margin-left: 75px;
+    border: none;
+    border-radius: 100px;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+
+}
+
+.fase-selection{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.fase-selection, h2{
+    font-size: 30px;
+    margin-left: 15px;
+}
+
+#selecaoFase{
+    border: none;
+    margin-left: 90px;
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+
+.menu-fase{
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.next{
+    font-size: 40px;
+    margin-left: 15px;
+}
+
+.play-next-level{
+    border: none;
+    border-radius: 100px;
+    padding: 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-top: 10px;
+    margin-left: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.pontuacao-necessaria{
+    position: relative;
+    display: none;
+    margin-left: 320px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.pontuacao-necessaria-score{
+    color: yellow;
+}
+
+.pause-game{
+    position: absolute;
+    margin-bottom: 390px;
+    margin-right: 240px;
+}
+
+.pause-game span{
+    color: yellow;
+    font-size: 22px;
+}
+
+.paused{
+    display: none;
+}
+
+.pausado{
+    position: absolute;
+    white-space: nowrap; /* Desconsidera a quebra de linha */
+    display: none; 
+    font-size: 50px;
+    font-weight: 800;
+    color: yellow;
+}
+
+.continue{
+    display: none;
+}
+
+
+
+
+

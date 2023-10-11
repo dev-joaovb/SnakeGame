@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="./css/estilo.css">
+</head>
+<body>
+
+        <div class="score">Score: <span class="score--value">00</span>
+        </div>
+        <div class="menu-iniciar">
+            <span class="start-game">Snake Game</span>
+
+            <div class="fase-selection">
+                <h2>Selecionar Fase</h2> 
+                <select id="selecaoFase">
+                    <option value="">--- Fase --</option>
+                    <option value="0">Fase 1</option>
+                    <option value="1">Fase 2</option>
+                    <option value="2">Fase 3</option>
+                    <option value="3">Fase 4</option>
+                    <option value="4">Fase 5</option>
+                    <option value="5">Fase 6</option>
+                    <option value="6">Fase 7</option>
+                    <option value="7">Fase 8</option>
+                    <option value="8">Fase 9</option>
+                    <option value="9">Fase 10</option>
+                </select>
+            </div>
+
+            <div class="nivel-dificuldade">
+                <select class="form-control" id="nivel">
+                    <option value="">-- Selecione o nível --</option>
+                    <option value="facil">Fácil</option>
+                    <option value="normal">Normal</option>
+                    <option value="dificil">Difícil</option>
+                    <option value="muito-dificil">Muito Difícil</option>
+                    <option value="impossivel">Impossível</option>
+                </select>
+            </div>
+            <button class="play-iniciar">
+                <span class="material-symbols-outlined space">
+                    play_circle
+                </span>
+                
+                Iniciar Jogo 
+            </button>
+        </div>
+
+        <div class="menu-fase">
+            <span class="next">FASE CONCLUÍDA</span>
+            
+            <button id="play-next" class="play-next-level">
+                <span class="material-symbols-outlined space">
+                    play_circle
+                </span>
+                
+                Jogar Próxima Fase 
+            </button>
+        </div>
+
+        <div class="menu-screen">
+            <span class="game-over">Game Over</span>
+            <span class="final-score">Score <span>00</span></span>
+            
+            <button class="btn-play">
+                <span class="material-symbols-outlined space">
+                    play_circle
+                </span>
+                
+                Jogar Novamente 
+            </button>
+            
+            <button class="btn-play back">
+                <span class="material-symbols-outlined space">
+                    play_circle
+                </span>
+                
+                Voltar ao Menu Principal
+            </button>
+        </div>
+    <div class="pause-game">
+        <div class="paused">
+            <p>Precione <span> "p" </span>para pausar o jogo</p>
+        </div>
+        
+        
+        <div class="continue">
+            <p>Precione<span> "c" </span>para continuar o jogo</p>
+        </div>
+    </div>
+    <div class="pausado">
+        <p>Jogo Pausado</p>
+    </div>
+    <div class="pontuacao-necessaria">
+        <p>Fazer <span class="pontuacao-necessaria-score"> 00 </span> pontos</p>
+    </div>
+    <!-- Criar animações -->
+    <canvas width="600" height="600"></canvas>
+    <script type="module" src="./js/index.js"></script>
+    <script type="module" src="./js/fase1.js"></script>
+    <script type="module" src="./js/fase2.js"></script>
+   <!-- <script src="./js/bundle.js"></script> -->
+
+</body>
+</html>
