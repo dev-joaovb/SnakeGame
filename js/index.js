@@ -38,12 +38,13 @@ const pausado = document.querySelector('.pausado')
 const continuar = document.querySelector('.continue')
 //const audio = new  Audio("../audio/assets_audio.mp3")
 let handleKeydown
-
+let isGameRunning = false;
+let isPaused = false;
 let direction, loopId
 let fase = 0
 
 function addEvent() {
-    document.addEventListener('keydown', handleKeydown);
+    document.addEventListener('keydown', handleKeydown)
 }
 
 addEvent()
@@ -174,6 +175,10 @@ switch (selecaoFase) {
 })
 function iniciarJogo(){
   //  const faseSelect = document.getElementById('fase')
+  isGameRunning = true;
+  isPaused = false;
+
+  addEvent()
 
     const incrementScore = () => {
         score.innerText = +score.innerText + 10
@@ -416,8 +421,9 @@ function iniciarJogo(){
     }
 
     const gameOver = () => {
-       direction = null
-    //   document.removeEventListener('keydown', handleKeydown)
+        direction = null
+        isGameRunning = false;
+        isPaused = false;
         removeEvent()
         menu.style.display = 'flex'
         finalScore.innerText = score.innerText
@@ -485,7 +491,8 @@ function iniciarJogo(){
    // document.addEventListener('keydown', handleKeydown)
     addEvent()
     // pausar o jogo
-document.addEventListener('keydown', ({ key }) => {
+    /*
+    document.addEventListener('keydown', ({ key }) => {
     if (key === 'p') {
         pausar.style.display = 'none'
         pausado.style.display = 'flex'
@@ -503,7 +510,36 @@ document.addEventListener('keydown', ({ key }) => {
         canvas.style.filter = 'none'
         gameLoop() //continue
     }
-});
+}); */
+
+document.addEventListener('keydown', (event) => {
+    if (isGameRunning && !isPaused) {
+      handleKeydown(event);
+    }
+  
+    if (isGameRunning) {
+      if (event.key === 'p') {
+        isPaused = true;
+        pausar.style.display = 'none';
+        pausado.style.display = 'flex';
+        continuar.style.display = 'flex';
+        if (loopId !== null) {
+          clearInterval(loopId);
+          loopId = null;
+        }
+      } else if (event.key === 'c') {
+        isPaused = false;
+        pausar.style.display = 'flex';
+        pausado.style.display = 'none';
+        continuar.style.display = 'none';
+        canvas.style.filter = 'none';
+        gameLoop();
+      }
+    }
+  });
+
+// Continuar do jogo
+  
 
 
 } // fim função iniciarJogo
