@@ -38,9 +38,9 @@ const pausado = document.querySelector('.pausado')
 const continuar = document.querySelector('.continue')
 //const audio = new  Audio("../audio/assets_audio.mp3")
 
-
 let direction, loopId
 let fase = 0
+
 
 
 
@@ -56,6 +56,7 @@ let additionalSquares = getAdditionalSquaresF1()
 
 let tipoNivel = 250 // valor padrão
 let pontuacao = 100 // padrão
+fazerPontuacao.innerText = pontuacao
 
 document.getElementById('nivel').addEventListener('change', function () {
     const nivel = this.value
@@ -162,7 +163,6 @@ switch (selecaoFase) {
     }
 })
 function iniciarJogo(){
-
   //  const faseSelect = document.getElementById('fase')
 
     const incrementScore = () => {
@@ -406,8 +406,8 @@ function iniciarJogo(){
     }
 
     const gameOver = () => {
-        direction = undefined
-
+       direction = null
+       document.removeEventListener('keydown', handleKeydown)
         menu.style.display = 'flex'
         finalScore.innerText = score.innerText
         canvas.style.filter = 'blur(10px)'
@@ -434,7 +434,8 @@ function iniciarJogo(){
     
     gameLoop()
 
-    document.addEventListener('keydown', ({key}) => {
+    /*
+        document.addEventListener('keydown', ({key}) => {
         if(key == 'ArrowRight' && direction != 'left'){
             direction = 'right'
         }
@@ -449,11 +450,29 @@ function iniciarJogo(){
 
         if( key == 'ArrowUp' && direction != 'down'){
             direction = 'up'
+        }       
+    }) */
+
+    const handleKeydown = ({ key }) => {
+        if (key == 'ArrowRight' && direction != 'left') {
+          direction = 'right'
         }
+      
+        if (key == 'ArrowLeft' && direction != 'right') {
+          direction = 'left'
+        }
+      
+        if (key == 'ArrowDown' && direction != 'up') {
+          direction = 'down'
+        }
+      
+        if (key == 'ArrowUp' && direction != 'down') {
+          direction = 'up'
+        }
+      }
 
-        
-    })
-
+    document.addEventListener('keydown', handleKeydown)
+    
     // pausar o jogo
 document.addEventListener('keydown', ({ key }) => {
     if (key === 'p') {
@@ -476,8 +495,6 @@ document.addEventListener('keydown', ({ key }) => {
 });
 
 
-    
-
 } // fim função iniciarJogo
 
 buttonIniciar.addEventListener('click', () => {
@@ -495,6 +512,7 @@ buttonPlay.addEventListener('click', () => {
     canvas.style.filter = 'none'
     loopId = 0
     snake = [initialPosition]
+    iniciarJogo()
 })
 
 buttonBack.addEventListener('click', () => {
@@ -512,3 +530,5 @@ buttonNext.addEventListener('click', () => {
     iniciarJogo()
 
 });
+
+document.addEventListener('keydown', handleKeydown)

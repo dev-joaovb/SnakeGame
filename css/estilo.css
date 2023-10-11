@@ -214,8 +214,22 @@ canvas{
 .continue{
     display: none;
 }
+.imagem{
+    position: absolute;
+}
 
+.imagem p{
+    margin-left: 700px;
+    font-size: 30px;
+    font-weight: 700;
+    color: yellow;
+}
 
+img{
+    height: 80px;
+    margin-left: 720px;
+    margin-top: 50px;
+}
 
 
 
