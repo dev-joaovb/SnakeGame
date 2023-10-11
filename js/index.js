@@ -37,11 +37,21 @@ const pausar = document.querySelector('.paused')
 const pausado = document.querySelector('.pausado')
 const continuar = document.querySelector('.continue')
 //const audio = new  Audio("../audio/assets_audio.mp3")
+let handleKeydown
 
 let direction, loopId
 let fase = 0
 
+function addEvent() {
+    document.addEventListener('keydown', handleKeydown);
+}
 
+addEvent()
+
+
+function removeEvent() {
+    document.removeEventListener('keydown', handleKeydown);
+}
 
 
 const size = 30 // tamanho do quadrado
@@ -407,7 +417,8 @@ function iniciarJogo(){
 
     const gameOver = () => {
        direction = null
-       document.removeEventListener('keydown', handleKeydown)
+    //   document.removeEventListener('keydown', handleKeydown)
+        removeEvent()
         menu.style.display = 'flex'
         finalScore.innerText = score.innerText
         canvas.style.filter = 'blur(10px)'
@@ -453,7 +464,7 @@ function iniciarJogo(){
         }       
     }) */
 
-    const handleKeydown = ({ key }) => {
+        handleKeydown = ({ key }) => {
         if (key == 'ArrowRight' && direction != 'left') {
           direction = 'right'
         }
@@ -471,8 +482,8 @@ function iniciarJogo(){
         }
       }
 
-    document.addEventListener('keydown', handleKeydown)
-    
+   // document.addEventListener('keydown', handleKeydown)
+    addEvent()
     // pausar o jogo
 document.addEventListener('keydown', ({ key }) => {
     if (key === 'p') {
@@ -530,5 +541,3 @@ buttonNext.addEventListener('click', () => {
     iniciarJogo()
 
 });
-
-document.addEventListener('keydown', handleKeydown)
