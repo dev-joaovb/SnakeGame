@@ -38,8 +38,6 @@ const pausado = document.querySelector('.pausado')
 const continuar = document.querySelector('.continue')
 //const audio = new  Audio("../audio/assets_audio.mp3")
 let handleKeydown
-let isGameRunning = false;
-let isPaused = false;
 let direction, loopId
 let fase = 0
 
@@ -173,12 +171,65 @@ switch (selecaoFase) {
         break;
     }
 })
-function iniciarJogo(){
-  //  const faseSelect = document.getElementById('fase')
-  isGameRunning = true;
-  isPaused = false;
 
-  addEvent()
+function selecaoDeFase(){
+switch (fase) { /// continuidade durante o jogo
+    case 1:    
+        console.log('Fase 2 selecionada')
+        additionalSquares = getAdditionalSquaresF2()
+        break;
+        
+    case 2:
+        additionalSquares = getAdditionalSquaresF3()
+        console.log('Fase 3 selecionada');
+        break;
+        
+    case 3:
+        additionalSquares = getAdditionalSquaresF4()
+        console.log('Fase 4 selecionada');
+        break;
+
+    case 4:
+        pontuacao = getPontuacaoF5()
+        fazerPontuacao.innerText = pontuacao
+        additionalSquares = getAdditionalSquaresF5()
+        console.log('Fase 5 selecionada');
+        break;
+
+    case 5:
+        additionalSquares = getAdditionalSquaresF6()
+        console.log('Fase 6 selecionada');
+        break;
+
+    case 6:
+        additionalSquares = getAdditionalSquaresF7()
+        console.log('Fase 7 selecionada');
+        break;
+
+    case 7:
+        additionalSquares = getAdditionalSquaresF8()
+        console.log('Fase 8 selecionada');
+        break;
+    
+    case 8:
+        additionalSquares = getAdditionalSquaresF9()
+        console.log('Fase 9 selecionada');
+        break;
+
+    case 9:
+        pontuacao = getPontuacaoF10()
+        fazerPontuacao.innerText = pontuacao
+        additionalSquares = getAdditionalSquaresF10()
+        console.log('Fase 10 selecionada');
+        break;
+        
+    default:
+        console.log('Fase desconhecida');
+        break;
+    }    
+
+}
+
 
     const incrementScore = () => {
         score.innerText = +score.innerText + 10
@@ -243,60 +294,7 @@ function iniciarJogo(){
         });
     };
 
-    switch (fase) {
-        case 1:    
-            console.log('Fase 2 selecionada')
-            additionalSquares = getAdditionalSquaresF2()
-            break;
-            
-        case 2:
-            additionalSquares = getAdditionalSquaresF3()
-            console.log('Fase 3 selecionada');
-            break;
-            
-        case 3:
-            additionalSquares = getAdditionalSquaresF4()
-            console.log('Fase 4 selecionada');
-            break;
     
-        case 4:
-            pontuacao = getPontuacaoF5()
-            fazerPontuacao.innerText = pontuacao
-            additionalSquares = getAdditionalSquaresF5()
-            console.log('Fase 5 selecionada');
-            break;
-    
-        case 5:
-            additionalSquares = getAdditionalSquaresF6()
-            console.log('Fase 6 selecionada');
-            break;
-    
-        case 6:
-            additionalSquares = getAdditionalSquaresF7()
-            console.log('Fase 7 selecionada');
-            break;
-    
-        case 7:
-            additionalSquares = getAdditionalSquaresF8()
-            console.log('Fase 8 selecionada');
-            break;
-        
-        case 8:
-            additionalSquares = getAdditionalSquaresF9()
-            console.log('Fase 9 selecionada');
-            break;
-    
-        case 9:
-            pontuacao = getPontuacaoF10()
-            fazerPontuacao.innerText = pontuacao
-            additionalSquares = getAdditionalSquaresF10()
-            console.log('Fase 10 selecionada');
-            break;
-            
-        default:
-            console.log('Fase desconhecida');
-            break;
-        }
     
 
 
@@ -364,11 +362,6 @@ function iniciarJogo(){
             let x = randomPosition()
             let y = randomPosition()
 
-//            while (snake.find((position) => position.x == x && position.y == y)){
-    //            x = randomPosition()
-  //              y = randomPosition()
-//            }
-
             do {
                 x = randomPosition();
                 y = randomPosition();
@@ -381,6 +374,7 @@ function iniciarJogo(){
         
 
         if(score.innerText == pontuacao){
+            removeEvent()
             nextLevel()
         }
 
@@ -409,6 +403,7 @@ function iniciarJogo(){
         })
 
         if(wallCollision || selCollision || squareCollision){
+            removeEvent()
             gameOver()
         }
     }
@@ -421,10 +416,7 @@ function iniciarJogo(){
     }
 
     const gameOver = () => {
-        direction = null
-        isGameRunning = false;
-        isPaused = false;
-        removeEvent()
+        direction = undefined
         menu.style.display = 'flex'
         finalScore.innerText = score.innerText
         canvas.style.filter = 'blur(10px)'
@@ -447,7 +439,7 @@ function iniciarJogo(){
     }
 
 
-    
+function iniciarJogo(){
     
     gameLoop()
 
@@ -491,7 +483,6 @@ function iniciarJogo(){
    // document.addEventListener('keydown', handleKeydown)
     addEvent()
     // pausar o jogo
-    /*
     document.addEventListener('keydown', ({ key }) => {
     if (key === 'p') {
         pausar.style.display = 'none'
@@ -500,49 +491,39 @@ function iniciarJogo(){
         if (loopId !== null) {
             clearInterval(loopId); // Pausa o gameLoop
             loopId = null; // Define loopId como nulo para indicar que o jogo está pausado
-        } else {
-            gameLoop(); // Resume o gameLoop
+
         }
+        // Continuar do jogo
     } else if(key == 'c'){
         pausar.style.display = 'flex'
         pausado.style.display = 'none'
         continuar.style.display = 'none'
         canvas.style.filter = 'none'
+        
         gameLoop() //continue
     }
-}); */
+}); 
+    
+}// fim função iniciarJogo
+function reiniciarJogo() {
+    // Limpe a tela do canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-document.addEventListener('keydown', (event) => {
-    if (isGameRunning && !isPaused) {
-      handleKeydown(event);
-    }
-  
-    if (isGameRunning) {
-      if (event.key === 'p') {
-        isPaused = true;
-        pausar.style.display = 'none';
-        pausado.style.display = 'flex';
-        continuar.style.display = 'flex';
-        if (loopId !== null) {
-          clearInterval(loopId);
-          loopId = null;
-        }
-      } else if (event.key === 'c') {
-        isPaused = false;
-        pausar.style.display = 'flex';
-        pausado.style.display = 'none';
-        continuar.style.display = 'none';
-        canvas.style.filter = 'none';
-        gameLoop();
-      }
-    }
-  });
+    // Restaure as configurações iniciais do jogo
+    score.innerText = '00';
+    snake = [initialPosition];
+    direction = undefined;
 
-// Continuar do jogo
-  
+    // Reinicie o gameLoop
+    clearInterval(loopId);
+    loopId = setTimeout(() => {
+    gameLoop()
+    }, tipoNivel);
 
-
-} // fim função iniciarJogo
+    // Redesenhe o grid e a comida
+    drawGrid();
+    drawFood();
+}
 
 buttonIniciar.addEventListener('click', () => {
     pausar.style.display = 'flex'
@@ -557,9 +538,10 @@ buttonPlay.addEventListener('click', () => {
     score.innerText = '00'
     menu.style.display = 'none'
     canvas.style.filter = 'none'
-    loopId = 0
-    snake = [initialPosition]
-    iniciarJogo()
+//    loopId = 0
+//    snake = [initialPosition]
+    addEvent()
+    reiniciarJogo()
 })
 
 buttonBack.addEventListener('click', () => {
@@ -569,11 +551,11 @@ buttonBack.addEventListener('click', () => {
 buttonNext.addEventListener('click', () => {
 //    proximaFase()
     fase += 1
+    selecaoDeFase()
     menuFase.style.display = 'none'
     canvas.style.filter = 'none'
     score.innerText = '00'
-    snake = [initialPosition]
     clearInterval(loopId)
-    iniciarJogo()
-
+    addEvent()
+    reiniciarJogo()
 });
